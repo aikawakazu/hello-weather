@@ -32,6 +32,7 @@ from flask import make_response
 
 # Flask app should start in global layout
 app = Flask(__name__)
+tranferdate = ''
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -67,6 +68,7 @@ def makeYqlQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
+    tranferdate = parameters.get("date")
     if city is None:
         return None
 
@@ -99,9 +101,6 @@ def makeWebhookResult(data):
 
     # print(json.dumps(item, indent=4))
 
-    result = req.get("result")
-    parameters = result.get("parameters")
-    tranferdate = parameters.get("date")
     bycurr = datetime.datetime.now()
     if tranferdate == bycurr.strftime("%Y-%m-%d"):
         valbydt = forecs[1].get('date')

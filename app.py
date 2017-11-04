@@ -94,12 +94,13 @@ def makeWebhookResult(data):
         return {}
 
     condition = item.get('condition')
-    if condition is None:
+    forecs = item.get('forecast')
+    if condition is None or (forecs is None):
         return {}
 
     # print(json.dumps(item, indent=4))
 
-    speech = condition.get('date') + location.get('city') + ": " + condition.get('text') + \
+    speech = forecs[2].get('date') + "is " + location.get('city') + ": " + condition.get('text') + \
              ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
 
     print("Response:")

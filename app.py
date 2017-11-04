@@ -104,13 +104,13 @@ def makeWebhookResult(data):
 
     bycurr = datetime.datetime.now()
     if tranferdate == bycurr.strftime("%Y-%m-%d"):
-        speech = forecs[1].get('date') + " is " + location.get('city') + ": " + forecs[1].get('text') + \
-                 ", the temperature is " + forecs[1].get('low') + " ~ " + forecs[1].get('high') + " " + units.get('temperature')
+        speech = tranferdate + " is " + location.get('city') + ": " + condition.get('text') + \
+                 ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
     elif tranferdate < bycurr.strftime("%Y-%m-%d"):
-        speech = forecs[0].get('date') + " is " + location.get('city') + ": " + forecs[0].get('text') + \
+        speech = tranferdate + " is " + location.get('city') + ": " + forecs[0].get('text') + \
                  ", the temperature is " + forecs[0].get('low') + " ~ " + forecs[0].get('high') + " " + units.get('temperature')
     else:
-        speech = forecs[2].get('date') + " is " + location.get('city') + ": " + forecs[2].get('text') + \
+        speech = tranferdate + " is " + location.get('city') + ": " + forecs[2].get('text') + \
                  ", the temperature is " + forecs[2].get('low') + " ~ " + forecs[2].get('high') + " " + units.get('temperature')
     
 

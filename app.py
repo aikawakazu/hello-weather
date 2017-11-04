@@ -24,6 +24,7 @@ from urllib.error import HTTPError
 
 import json
 import os
+import datetime
 
 from flask import Flask
 from flask import request
@@ -100,7 +101,14 @@ def makeWebhookResult(data):
 
     # print(json.dumps(item, indent=4))
 
-    speech = forecs[2].get('date') + "is " + location.get('city') + ": " + condition.get('text') + \
+    bycurr = datetime.datetime.now()
+    if date == bycurr.strftime("%Y-%m-%d"):
+        valbydt = forecs[1].get('date')
+    elif date < bycurr.strftime("%Y-%m-%d"):
+        valbydt = forecs[0].get('date')
+    else:
+        valbydt = forecs[2].get('date')
+    speech = valbydt + " is " + location.get('city') + ": " + condition.get('text') + \
              ", the temperature is " + condition.get('temp') + " " + units.get('temperature')
 
     print("Response:")

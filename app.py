@@ -68,6 +68,7 @@ def makeYqlQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
+    global tranferdate
     tranferdate = parameters.get("date")
     if city is None:
         return None
